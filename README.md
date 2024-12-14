@@ -1,4 +1,4 @@
-# Django Tasks Application
+# Django Task Traker
 
 A simple task management application built with Python3 and Django.
 
