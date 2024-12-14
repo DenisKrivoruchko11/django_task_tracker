@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Список задач</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .task {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Список задач</h1>
+    <a href="{% url 'task-create' %}">Добавить новую задачу</a>
+
+    {% for task in tasks %}
+    <div class="task {% if task.completed %}completed{% endif %}">
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+        <form action="{% url 'toggle-task' task.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit">
+                {% if task.completed %}
+                Отменить выполнение
+                {% else %}
+                Отметить как выполненное
+                {% endif %}
+            </button>
+        </form>
+    </div>
+    {% endfor %}
+</body>
+
+</html>
